@@ -19,6 +19,16 @@ public abstract class Entity implements Drawable, Updatable {
 
     protected EntityType id;
 
+    public Entity(float x, float y, float xv, float yv, int width, int height, EntityType id) {
+        this.x = x;
+        this.y = y;
+        this.xv = xv;
+        this.yv = yv;
+        this.width = width;
+        this.height = height;
+        this.id = id;
+    }
+
     public Rectangle getRectangle() {
         return new Rectangle((int) this.x, (int) this.y, this.width, this.height);
     }
