@@ -21,6 +21,20 @@ public class GameState implements Drawable, Updatable {
         this.gameStateModeManager.init();
     }
 
+    public void switchMode(GameMode mode) {
+        switch (mode) {
+            case HOME_SCREEN:
+                this.gameStateModeManager = new GameStateHomeManager();
+                break;
+            case PLAYING_CLASSIC:
+                this.gameStateModeManager = new GameStateClassicManager();
+                break;
+        }
+
+        this.gameStateModeManager.init();
+
+    }
+
     @Override
     public void draw(Graphics2D g2d) {
         this.gameStateModeManager.draw(g2d);
