@@ -5,10 +5,13 @@ import com.github.spaceshooteriii.game.entitys.Entity;
 import com.github.spaceshooteriii.game.entitys.EntityHandler;
 import com.github.spaceshooteriii.game.entitys.Player;
 import com.github.spaceshooteriii.game.state.GameState;
+import com.github.spaceshooteriii.game.textures.BufferedImageLoader;
+import com.github.spaceshooteriii.game.textures.TextraAlice;
 import lombok.Getter;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 
 public class Game {
 
@@ -18,6 +21,9 @@ public class Game {
 
     public static final int WIDTH = 820;
     public static final int HEIGHT = 724;
+
+    public static BufferedImageLoader TEXTRA_ALICE_LOADER = new BufferedImageLoader("/assets/images/textra-alice.png");
+    public static TextraAlice TEXTRA_ALICE = new TextraAlice(TEXTRA_ALICE_LOADER.getImage());
 
     public Game() {
         this.frame = new JFrame();
