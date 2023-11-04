@@ -7,6 +7,7 @@ import com.github.spaceshooteriii.game.state.GameStateModeManager;
 import lombok.Getter;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 
 public class GameStateClassicManager extends GameStateModeManager {
 
@@ -34,5 +35,20 @@ public class GameStateClassicManager extends GameStateModeManager {
     public void init() {
         this.entityHandler = new EntityHandler();
         this.entityHandler.add(new Player((float) Game.WIDTH / 2 - 32, (float) Game.WIDTH / 2 - 32, 64, 64));
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

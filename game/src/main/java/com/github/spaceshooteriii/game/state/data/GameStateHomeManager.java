@@ -4,6 +4,7 @@ import com.github.spaceshooteriii.game.Game;
 import com.github.spaceshooteriii.game.state.GameStateModeManager;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class GameStateHomeManager extends GameStateModeManager {
@@ -70,6 +71,21 @@ public class GameStateHomeManager extends GameStateModeManager {
         this.activePlayButtonImage = Game.TEXTRA_ALICE.getImageFrom(112, 32, 64, 16);
 
         this.playButtonActive = false;
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }
