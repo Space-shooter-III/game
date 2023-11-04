@@ -16,8 +16,6 @@ public class Game {
     public static final int WIDTH = 820;
     public static final int HEIGHT = 724;
 
-    public static EntityHandler eh;
-
     public Game() {
         this.frame = new JFrame();
         this.gamePanel = new GamePanel();
@@ -36,9 +34,6 @@ public class Game {
 
         this.frame.setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
         this.frame.setVisible(true);
-
-        Game.eh = new EntityHandler();
-        Game.eh.add(new Player((float)(Game.WIDTH / 2) - 32, (float)(Game.HEIGHT / 2) - 32, 64, 64));
 
         this.gamePanel.startGameLoop();
     }

@@ -67,7 +67,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void update() {
-        Game.eh.update();
 
     }
 
@@ -85,10 +84,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
-
-
-        Game.eh.draw(g2d);
-
 
     }
 
