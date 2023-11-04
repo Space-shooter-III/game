@@ -1,17 +1,47 @@
 package com.github.spaceshooteriii.game.display.compoments;
 
 import com.github.spaceshooteriii.game.Game;
+import com.github.spaceshooteriii.game.event.listeners.KeyBoardEventListener;
+import com.github.spaceshooteriii.game.event.listeners.MouseEventListener;
+import com.github.spaceshooteriii.game.event.listeners.MouseMotionEventListener;
+import com.github.spaceshooteriii.game.event.listeners.MouseWheelEventListener;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     private final int FPS;
 
+    private KeyBoardEventListener keyListener;
+    private MouseEventListener mouseListener;
+    private MouseMotionEventListener mouseMotionListener;
+    private MouseWheelEventListener mouseWheelListener;
+
+
+    private static Logger LOGGER = LogManager.getLogger("GamePanel");
+
     public GamePanel() {
+
+        this.keyListener = new KeyBoardEventListener();
+        this.mouseListener = new MouseEventListener();
+        this.mouseMotionListener = new MouseMotionEventListener();
+        this.mouseWheelListener = new MouseWheelEventListener();
+
+        GamePanel.LOGGER.info("Created GamePanel class");
+
         this.FPS = 60;
+
+        this.addKeyListener(this.keyListener);
+        this.addMouseListener(this.mouseListener);
+        this.addMouseMotionListener(this.mouseMotionListener);
+        this.addMouseWheelListener(this.mouseWheelListener);
 
         this.setDoubleBuffered(true);
     }
@@ -19,12 +49,16 @@ public class GamePanel extends JPanel implements Runnable {
     public void startGameLoop() {
         this.gameThread = new Thread(this);
         this.gameThread.setDaemon(false);
+        this.gameThread.setName("game-thread");
+        GamePanel.LOGGER.info("Starting game thread");
         this.gameThread.start();
     }
 
 
     @Override
     public void run() {
+        GamePanel.LOGGER.info("Started game thread");
+
         this.requestFocus();
 
         double drawInterval = (double) (1000000000 / this.FPS);

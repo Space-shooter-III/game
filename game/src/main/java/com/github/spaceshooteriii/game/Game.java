@@ -5,10 +5,15 @@ import com.github.spaceshooteriii.game.entitys.Entity;
 import com.github.spaceshooteriii.game.entitys.EntityHandler;
 import com.github.spaceshooteriii.game.entitys.Player;
 import com.github.spaceshooteriii.game.state.GameState;
+import com.github.spaceshooteriii.game.textures.BufferedImageLoader;
+import com.github.spaceshooteriii.game.textures.TextraAlice;
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 
 public class Game {
 
@@ -19,7 +24,13 @@ public class Game {
     public static final int WIDTH = 820;
     public static final int HEIGHT = 724;
 
+    public static BufferedImageLoader TEXTRA_ALICE_LOADER = new BufferedImageLoader("/assets/images/textra-alice.png");
+    public static TextraAlice TEXTRA_ALICE = new TextraAlice(TEXTRA_ALICE_LOADER.getImage());
+
+    private static Logger LOGGER = LogManager.getLogger("Game");
+
     public Game() {
+        Game.LOGGER.info("Starting...");
         this.frame = new JFrame();
         this.gamePanel = new GamePanel();
         Game.state = new GameState();
@@ -40,6 +51,7 @@ public class Game {
         this.frame.setVisible(true);
 
         this.gamePanel.startGameLoop();
+        Game.LOGGER.info("Started");
     }
 
 }
