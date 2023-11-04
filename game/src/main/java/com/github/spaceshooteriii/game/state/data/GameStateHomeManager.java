@@ -4,6 +4,7 @@ import com.github.spaceshooteriii.game.Game;
 import com.github.spaceshooteriii.game.state.GameStateModeManager;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -70,7 +71,7 @@ public class GameStateHomeManager extends GameStateModeManager {
         this.skyImage = Game.TEXTRA_ALICE.getImageFrom(0, 0, 16, 16);
         this.titleImage = Game.TEXTRA_ALICE.getImageFrom(16, 0, 96, 32);
         this.playButtonImage = Game.TEXTRA_ALICE.getImageFrom(112, 0, 64, 16);
-        this.activePlayButtonImage = Game.TEXTRA_ALICE.getImageFrom(112, 32, 64, 16);
+        this.activePlayButtonImage = Game.TEXTRA_ALICE.getImageFrom(112, 16, 64, 16);
 
         this.playButtonActive = false;
 
@@ -123,6 +124,9 @@ public class GameStateHomeManager extends GameStateModeManager {
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        Rectangle playButtonBox = new Rectangle(((Game.WIDTH / 2) - (64 * 4) / 2), Game.HEIGHT / 3 * 2 - 16 * 4, 64 * 4, 16 * 4);
+
+        this.playButtonActive = playButtonBox.contains(e.getX(), e.getY());
 
     }
 
