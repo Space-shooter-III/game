@@ -31,7 +31,7 @@ public class GameStateHomeManager extends GameStateModeManager {
 
         // Draw title
 
-        g2d.drawImage(this.titleImage, ((Game.WIDTH / 2) - (96 * 4) / 2), 16, 96 * 4, 32 * 4, null);
+        g2d.drawImage(this.titleImage, ((Game.WIDTH / 2) - (96 * 6) / 2), 16, 96 * 6, 32 * 6, null);
 
     }
 
