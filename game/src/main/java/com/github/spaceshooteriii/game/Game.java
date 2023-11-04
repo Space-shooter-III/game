@@ -4,6 +4,8 @@ import com.github.spaceshooteriii.game.display.compoments.GamePanel;
 import com.github.spaceshooteriii.game.entitys.Entity;
 import com.github.spaceshooteriii.game.entitys.EntityHandler;
 import com.github.spaceshooteriii.game.entitys.Player;
+import com.github.spaceshooteriii.game.state.GameState;
+import lombok.Getter;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;
@@ -12,15 +14,15 @@ public class Game {
 
     private JFrame frame;
     private GamePanel gamePanel;
+    private static @Getter GameState state;
 
     public static final int WIDTH = 820;
     public static final int HEIGHT = 724;
 
-    public static EntityHandler eh;
-
     public Game() {
         this.frame = new JFrame();
         this.gamePanel = new GamePanel();
+        Game.state = new GameState();
 
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setLocationRelativeTo(null);
@@ -36,9 +38,6 @@ public class Game {
 
         this.frame.setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
         this.frame.setVisible(true);
-
-        Game.eh = new EntityHandler();
-        Game.eh.add(new Player((float)(Game.WIDTH / 2) - 32, (float)(Game.HEIGHT / 2) - 32, 64, 64));
 
         this.gamePanel.startGameLoop();
     }
