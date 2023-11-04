@@ -9,9 +9,12 @@ import java.awt.image.BufferedImage;
 public class GameStateHomeManager extends GameStateModeManager {
 
     private BufferedImage skyImage;
+    private BufferedImage titleImage;
 
     @Override
     public void draw(Graphics2D g2d) {
+
+        // Draw background
 
         int x = 0;
         int y = 0;
@@ -25,6 +28,10 @@ public class GameStateHomeManager extends GameStateModeManager {
             y += size;
             x = 0;
         }
+
+        // Draw title
+
+        g2d.drawImage(this.titleImage, ((Game.WIDTH / 2) - (96 * 4) / 2), 16, 96 * 4, 32 * 4, null);
 
     }
 
@@ -46,6 +53,7 @@ public class GameStateHomeManager extends GameStateModeManager {
     @Override
     public void init() {
         this.skyImage = Game.TEXTRA_ALICE.getImageFrom(0, 0, 16, 16);
+        this.titleImage = Game.TEXTRA_ALICE.getImageFrom(16, 0, 96, 32);
 
     }
 }
