@@ -1,6 +1,7 @@
 package com.github.spaceshooteriii.game.state.data;
 
 import com.github.spaceshooteriii.game.Game;
+import com.github.spaceshooteriii.game.state.GameMode;
 import com.github.spaceshooteriii.game.state.GameStateModeManager;
 
 import java.awt.Graphics2D;
@@ -104,6 +105,11 @@ public class GameStateHomeManager extends GameStateModeManager {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        Rectangle playButtonBox = new Rectangle(((Game.WIDTH / 2) - (64 * 4) / 2), Game.HEIGHT / 3 * 2 - 16 * 4, 64 * 4, 16 * 4);
+
+        if (playButtonBox.contains(e.getX(), e.getY())) {
+            Game.getState().switchMode(GameMode.PLAYING_CLASSIC);
+        }
 
     }
 

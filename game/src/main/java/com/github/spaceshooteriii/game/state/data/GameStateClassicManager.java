@@ -3,6 +3,7 @@ package com.github.spaceshooteriii.game.state.data;
 import com.github.spaceshooteriii.game.Game;
 import com.github.spaceshooteriii.game.entitys.EntityHandler;
 import com.github.spaceshooteriii.game.entitys.Player;
+import com.github.spaceshooteriii.game.state.GameMode;
 import com.github.spaceshooteriii.game.state.GameStateModeManager;
 import lombok.Getter;
 
@@ -66,7 +67,11 @@ public class GameStateClassicManager extends GameStateModeManager {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        // ! TESTING CODE START
 
+        Game.getState().switchMode(GameMode.HOME_SCREEN);
+
+        // ! TESTING CODE END
     }
 
     @Override
