@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.swing.JFrame;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Game {
@@ -26,6 +26,7 @@ public class Game {
 
     public static BufferedImageLoader TEXTRA_ALICE_LOADER = null;
     public static TextraAlice TEXTRA_ALICE = null;
+    public static Font GAME_FONT = null;
 
     private static Logger LOGGER = LogManager.getLogger("Game");
 

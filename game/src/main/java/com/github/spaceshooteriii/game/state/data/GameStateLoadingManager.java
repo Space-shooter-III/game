@@ -6,8 +6,10 @@ import com.github.spaceshooteriii.game.state.GameStateModeManager;
 import com.github.spaceshooteriii.game.textures.BufferedImageLoader;
 import com.github.spaceshooteriii.game.textures.TextraAlice;
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -15,8 +17,12 @@ import java.awt.image.BufferedImage;
 
 public class GameStateLoadingManager extends GameStateModeManager {
 
+    private static Logger LOGGER = LogManager.getLogger("GameStateLoadingManager");
+
     private class LoadingThread implements Runnable {
         private @Getter boolean loading;
+
+        private static Logger LOGGER = LogManager.getLogger("LoadingThread");
 
         public LoadingThread() {
             this.loading = true;
@@ -24,18 +30,18 @@ public class GameStateLoadingManager extends GameStateModeManager {
 
         @Override
         public void run() {
-            // Load files
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            LoadingThread.LOGGER.info("Loading all assets");
+
+            Game.TEXTRA_ALICE_LOADER = new BufferedImageLoader("/assets/images/textra-alice.png");
+            Game.TEXTRA_ALICE = new TextraAlice(Game.TEXTRA_ALICE_LOADER.getImage());
+
+            GameStateLoadingManager.LOGGER.info("Loaded textra-alice");
+
             this.loading = false;
+            LoadingThread.LOGGER.info("Loaded all assets");
         }
     }
 
-
-    private BufferedImage skyImage;
     private LoadingThread loadingThread;
 
     @Override
@@ -43,18 +49,14 @@ public class GameStateLoadingManager extends GameStateModeManager {
 
         // Draw background
 
-        int x = 0;
-        int y = 0;
-        final int size = 64;
+        g2d.setColor(new Color(0xf74040));
+        g2d.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 
-        for (int i = 0; i < Math.ceil((double) Game.HEIGHT / size) + 1; i++) {
-            for (int j = 0; j < Math.ceil((double) Game.HEIGHT / size) + 1; j++) {
-                g2d.drawImage(this.skyImage, x, y, size, size, null);
-                x += size;
-            }
-            y += size;
-            x = 0;
-        }
+        g2d.setFont(Game.GAME_FONT.deriveFont(Font.PLAIN, 50f));
+        g2d.setColor(new Color(0xffffff));
+        g2d.drawString("Loading...", Game.WIDTH / 2 - 100, Game.HEIGHT / 2);
+        g2d.setFont(Game.GAME_FONT.deriveFont(Font.PLAIN, 25f));
+        g2d.drawString("This should be fast", Game.WIDTH / 2 - 100, Game.HEIGHT / 2 + 50);
 
     }
 
@@ -69,10 +71,14 @@ public class GameStateLoadingManager extends GameStateModeManager {
 
     @Override
     public void init() {
-        Game.TEXTRA_ALICE_LOADER = new BufferedImageLoader("/assets/images/textra-alice.png");
-        Game.TEXTRA_ALICE = new TextraAlice(Game.TEXTRA_ALICE_LOADER.getImage());
 
-        this.skyImage = Game.TEXTRA_ALICE.getImageFrom(0, 0, 16, 16);
+        try {
+            Game.GAME_FONT = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/assets/fonts/Roboto-Regular.ttf"));
+        } catch (Exception e) {
+            GameStateLoadingManager.LOGGER.error("Cannot load Roboto font failed with error: {}", "/assets/fonts/Roboto-Regular.ttf");
+        }
+
+        GameStateLoadingManager.LOGGER.info("Loaded Roboto font");
 
         this.loadingThread = new LoadingThread();
 
