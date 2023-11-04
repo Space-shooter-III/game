@@ -1,6 +1,8 @@
 package com.github.spaceshooteriii.game.display.compoments;
 
 import com.github.spaceshooteriii.game.Game;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.JPanel;
 import java.awt.*;
@@ -10,7 +12,11 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread gameThread;
     private final int FPS;
 
+    private static Logger LOGGER = LogManager.getLogger("GamePanel");
+
     public GamePanel() {
+        GamePanel.LOGGER.info("Created GamePanel class");
+
         this.FPS = 60;
 
         this.setDoubleBuffered(true);
@@ -19,12 +25,16 @@ public class GamePanel extends JPanel implements Runnable {
     public void startGameLoop() {
         this.gameThread = new Thread(this);
         this.gameThread.setDaemon(false);
+        this.gameThread.setName("game-thread");
+        GamePanel.LOGGER.info("Starting game thread");
         this.gameThread.start();
     }
 
 
     @Override
     public void run() {
+        GamePanel.LOGGER.info("Started game thread");
+
         this.requestFocus();
 
         double drawInterval = (double) (1000000000 / this.FPS);
