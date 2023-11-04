@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.swing.JFrame;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Game {
@@ -24,8 +24,9 @@ public class Game {
     public static final int WIDTH = 820;
     public static final int HEIGHT = 724;
 
-    public static BufferedImageLoader TEXTRA_ALICE_LOADER = new BufferedImageLoader("/assets/images/textra-alice.png");
-    public static TextraAlice TEXTRA_ALICE = new TextraAlice(TEXTRA_ALICE_LOADER.getImage());
+    public static BufferedImageLoader TEXTRA_ALICE_LOADER = null;
+    public static TextraAlice TEXTRA_ALICE = null;
+    public static Font GAME_FONT = null;
 
     private static Logger LOGGER = LogManager.getLogger("Game");
 

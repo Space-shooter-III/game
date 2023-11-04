@@ -4,6 +4,7 @@ import com.github.spaceshooteriii.game.Drawable;
 import com.github.spaceshooteriii.game.Updatable;
 import com.github.spaceshooteriii.game.state.data.GameStateClassicManager;
 import com.github.spaceshooteriii.game.state.data.GameStateHomeManager;
+import com.github.spaceshooteriii.game.state.data.GameStateLoadingManager;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -20,8 +21,8 @@ public class GameState implements Drawable, Updatable {
     private static Logger LOGGER = LogManager.getLogger("GameState");
 
     public GameState() {
-        this.mode = GameMode.HOME_SCREEN;
-        this.gameStateModeManager = new GameStateHomeManager();
+        this.mode = GameMode.LOADING_SCREEN;
+        this.gameStateModeManager = new GameStateLoadingManager();
         GameState.LOGGER.info("Running init for game mode: {}", this.mode);
         this.gameStateModeManager.init();
     }
@@ -36,6 +37,9 @@ public class GameState implements Drawable, Updatable {
                 break;
             case PLAYING_CLASSIC:
                 this.gameStateModeManager = new GameStateClassicManager();
+                break;
+            case LOADING_SCREEN:
+                this.gameStateModeManager = new GameStateLoadingManager();
                 break;
         }
 
