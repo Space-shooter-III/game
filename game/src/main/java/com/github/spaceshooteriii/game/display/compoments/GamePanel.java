@@ -67,7 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void update() {
-
+        Game.getState().update();
     }
 
     @Override
@@ -81,9 +81,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+
+        Game.getState().draw(g2d);
 
     }
 
