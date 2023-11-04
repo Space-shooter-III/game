@@ -4,6 +4,7 @@ import com.github.spaceshooteriii.game.Game;
 import com.github.spaceshooteriii.game.event.listeners.KeyBoardEventListener;
 import com.github.spaceshooteriii.game.event.listeners.MouseEventListener;
 import com.github.spaceshooteriii.game.event.listeners.MouseMotionEventListener;
+import com.github.spaceshooteriii.game.event.listeners.MouseWheelEventListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,6 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
     private KeyBoardEventListener keyListener;
     private MouseEventListener mouseListener;
     private MouseMotionEventListener mouseMotionListener;
+    private MouseWheelEventListener mouseWheelListener;
 
 
     private static Logger LOGGER = LogManager.getLogger("GamePanel");
@@ -30,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.keyListener = new KeyBoardEventListener();
         this.mouseListener = new MouseEventListener();
         this.mouseMotionListener = new MouseMotionEventListener();
+        this.mouseWheelListener = new MouseWheelEventListener();
 
         GamePanel.LOGGER.info("Created GamePanel class");
 
@@ -38,6 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(this.keyListener);
         this.addMouseListener(this.mouseListener);
         this.addMouseMotionListener(this.mouseMotionListener);
+        this.addMouseWheelListener(this.mouseWheelListener);
 
         this.setDoubleBuffered(true);
     }
