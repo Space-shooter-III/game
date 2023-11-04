@@ -24,8 +24,8 @@ public class Game {
     public static final int WIDTH = 820;
     public static final int HEIGHT = 724;
 
-    public static BufferedImageLoader TEXTRA_ALICE_LOADER = new BufferedImageLoader("/assets/images/textra-alice.png");
-    public static TextraAlice TEXTRA_ALICE = new TextraAlice(TEXTRA_ALICE_LOADER.getImage());
+    public static BufferedImageLoader TEXTRA_ALICE_LOADER = null;
+    public static TextraAlice TEXTRA_ALICE = null;
 
     private static Logger LOGGER = LogManager.getLogger("Game");
 
