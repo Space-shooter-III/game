@@ -10,6 +10,10 @@ public class GameStateHomeManager extends GameStateModeManager {
 
     private BufferedImage skyImage;
     private BufferedImage titleImage;
+    private BufferedImage playButtonImage;
+    private BufferedImage activePlayButtonImage;
+
+    private boolean playButtonActive;
 
     @Override
     public void draw(Graphics2D g2d) {
@@ -33,6 +37,14 @@ public class GameStateHomeManager extends GameStateModeManager {
 
         g2d.drawImage(this.titleImage, ((Game.WIDTH / 2) - (96 * 6) / 2), 16, 96 * 6, 32 * 6, null);
 
+        // Draw buttons
+
+        if (this.playButtonActive) {
+            g2d.drawImage(this.activePlayButtonImage, ((Game.WIDTH / 2) - (64 * 4) / 2), Game.HEIGHT / 3 * 2 - 16 * 4, 64 * 4, 16 * 4, null);
+        } else {
+            g2d.drawImage(this.playButtonImage, ((Game.WIDTH / 2) - (64 * 4) / 2), Game.HEIGHT / 3 * 2 - 16 * 4, 64 * 4, 16 * 4, null);
+        }
+
     }
 
     @Override
@@ -54,6 +66,10 @@ public class GameStateHomeManager extends GameStateModeManager {
     public void init() {
         this.skyImage = Game.TEXTRA_ALICE.getImageFrom(0, 0, 16, 16);
         this.titleImage = Game.TEXTRA_ALICE.getImageFrom(16, 0, 96, 32);
+        this.playButtonImage = Game.TEXTRA_ALICE.getImageFrom(112, 0, 64, 16);
+        this.activePlayButtonImage = Game.TEXTRA_ALICE.getImageFrom(112, 32, 64, 16);
+
+        this.playButtonActive = false;
 
     }
 }
