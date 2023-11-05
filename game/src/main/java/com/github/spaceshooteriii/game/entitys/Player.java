@@ -38,10 +38,6 @@ public class Player extends ImageEntity {
 
     @Override
     public void update() {
-//        this.deg++;
-//        if (this.deg > 360) {
-//            this.deg = 0;
-//        }
 
         this.x += this.xv;
         this.y += this.yv;
