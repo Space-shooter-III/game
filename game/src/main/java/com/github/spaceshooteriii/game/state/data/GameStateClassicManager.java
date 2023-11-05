@@ -1,6 +1,7 @@
 package com.github.spaceshooteriii.game.state.data;
 
 import com.github.spaceshooteriii.game.Game;
+import com.github.spaceshooteriii.game.entitys.Entity;
 import com.github.spaceshooteriii.game.entitys.EntityHandler;
 import com.github.spaceshooteriii.game.entitys.Player;
 import com.github.spaceshooteriii.game.state.GameMode;
@@ -23,6 +24,8 @@ public class GameStateClassicManager extends GameStateModeManager {
 
     private boolean backButtonActive;
 
+    private @Getter Player player;
+
     @Override
     public void draw(Graphics2D g2d) {
 
@@ -43,6 +46,8 @@ public class GameStateClassicManager extends GameStateModeManager {
 
         this.entityHandler.draw(g2d);
 
+        this.player.draw(g2d);
+
         if (this.backButtonActive) {
             g2d.drawImage(this.activeBackButtonImage, 16, 16, 48, 48, null);
         } else {
@@ -54,6 +59,8 @@ public class GameStateClassicManager extends GameStateModeManager {
     @Override
     public void update() {
         this.entityHandler.update();
+
+        this.player.update();
     }
 
     @Override
@@ -67,7 +74,7 @@ public class GameStateClassicManager extends GameStateModeManager {
     @Override
     public void init() {
         this.entityHandler = new EntityHandler();
-        this.entityHandler.add(new Player((float) Game.WIDTH / 2 - 32, (float) Game.WIDTH / 2 - 32, 64, 64));
+        this.player = new Player((float) Game.WIDTH / 2 - 32, (float) Game.WIDTH / 2 - 32, 64, 64);
 
         this.backButtonImage = Game.TEXTRA_ALICE.getImageFrom(176, 16, 16, 16);
         this.activeBackButtonImage = Game.TEXTRA_ALICE.getImageFrom(192, 16, 16, 16);
@@ -110,6 +117,9 @@ public class GameStateClassicManager extends GameStateModeManager {
         if (backButtonBox.contains(e.getX(), e.getY())) {
             Game.getState().switchMode(GameMode.HOME_SCREEN);
         }
+
+        this.player.shot();
+
     }
 
     @Override
@@ -133,6 +143,9 @@ public class GameStateClassicManager extends GameStateModeManager {
         Rectangle backButtonBox = new Rectangle(16, 16, 48, 48);
 
         this.backButtonActive = backButtonBox.contains(e.getX(), e.getY());
+
+        this.player.setMouseX(e.getX());
+        this.player.setMouseY(e.getY());
 
     }
 

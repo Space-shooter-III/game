@@ -64,4 +64,46 @@ public class Game {
             return var;
         }
     }
+
+    public static float[] calculateDirection(float targetX, float targetY, final float BASE_SPEED, float x, float y) {
+
+        float diffX = (float) ((float) (x - targetX) - 8);
+        float diffY = (float) ((float) (y - targetY) - 8);
+
+        float distance = (float) Math.sqrt(
+
+                (double) (
+                        (double) (
+
+                                (double) (
+                                        x - targetX
+                                ) *
+                                        (double) (
+                                                x - targetX
+                                        )
+
+                        ) + (double) (
+
+                                (double) (
+                                        y - targetY
+                                ) *
+                                        (double) (
+                                                y - targetY
+                                        )
+
+                        ))
+
+        );
+
+        final float SPEED = -BASE_SPEED;
+
+        float xv = (float) ((float) (SPEED / distance) * diffX);
+        float yv = (float) ((float) (SPEED / distance) * diffY);
+
+        float[] result = {xv, yv};
+
+        return result;
+
+    }
+
 }
