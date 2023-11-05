@@ -56,7 +56,7 @@ public class Player extends ImageEntity {
 
             ((GameStateClassicManager) Game.getState().getGameStateModeManager())
                     .getEntityHandler()
-                    .add(new Bullet(this.x + this.width / 2, this.y + this.height / 2, vs[0], vs[1], 32, 32, this.deg));
+                    .add(new Bullet(this.x + this.width / 2, this.y + this.height / 2, vs[0], vs[1], 32, 32, this.deg, this));
         }
     }
 

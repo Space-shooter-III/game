@@ -11,10 +11,12 @@ import java.awt.geom.AffineTransform;
 public class Bullet extends ImageEntity {
 
     private @Getter @Setter int deg;
+    private final @Getter Entity shooter;
 
-    public Bullet(float x, float y, float xv, float yv, int width, int height, int deg) {
+    public Bullet(float x, float y, float xv, float yv, int width, int height, int deg, Entity shooter) {
         super(x, y, xv, yv, width, height, EntityType.BULLET, Game.TEXTRA_ALICE.getImageFrom(208, 0, 16, 16));
         this.deg = deg;
+        this.shooter = shooter;
     }
 
     @Override
