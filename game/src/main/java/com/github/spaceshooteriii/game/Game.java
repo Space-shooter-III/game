@@ -55,4 +55,13 @@ public class Game {
         Game.LOGGER.info("Started");
     }
 
+    public static float clamp(float var, float max, float min) {
+        if (var >= max) {
+            return max;
+        } else if (var <= min) {
+            return min;
+        } else {
+            return var;
+        }
+    }
 }

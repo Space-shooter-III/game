@@ -86,6 +86,7 @@ public class GameStateHomeManager extends GameStateModeManager {
         this.activeQuitButtonImage = Game.TEXTRA_ALICE.getImageFrom(192, 0, 16, 16);
 
         this.playButtonActive = false;
+        this.activeQuitButton = false;
 
     }
 

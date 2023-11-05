@@ -5,8 +5,11 @@ import com.github.spaceshooteriii.game.Game;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.util.Random;
 
 public class Player extends ImageEntity {
+
+    public static final float SLOW_BY = 0.01f;
 
     private int deg = 0;
 
@@ -34,5 +37,12 @@ public class Player extends ImageEntity {
         if (deg > 360) {
             deg = 0;
         }
+
+        this.x += this.xv;
+        this.y += this.yv;
+
+        this.x = Game.clamp(this.x, (float) (Game.WIDTH - this.width), 0f);
+        this.y = Game.clamp(this.y, (float) (Game.HEIGHT - (float) (this.height * 1.3f)), 0f);
+
     }
 }

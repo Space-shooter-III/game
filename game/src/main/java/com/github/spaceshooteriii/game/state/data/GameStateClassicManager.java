@@ -7,7 +7,7 @@ import com.github.spaceshooteriii.game.state.GameMode;
 import com.github.spaceshooteriii.game.state.GameStateModeManager;
 import lombok.Getter;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -17,6 +17,11 @@ public class GameStateClassicManager extends GameStateModeManager {
 
     private @Getter EntityHandler entityHandler;
     private BufferedImage skyImage;
+
+    private BufferedImage backButtonImage;
+    private BufferedImage activeBackButtonImage;
+
+    private boolean backButtonActive;
 
     @Override
     public void draw(Graphics2D g2d) {
@@ -37,6 +42,13 @@ public class GameStateClassicManager extends GameStateModeManager {
         }
 
         this.entityHandler.draw(g2d);
+
+        if (this.backButtonActive) {
+            g2d.drawImage(this.activeBackButtonImage, 16, 16, 48, 48, null);
+        } else {
+            g2d.drawImage(this.backButtonImage, 16, 16, 48, 48, null);
+        }
+
     }
 
     @Override
@@ -57,7 +69,12 @@ public class GameStateClassicManager extends GameStateModeManager {
         this.entityHandler = new EntityHandler();
         this.entityHandler.add(new Player((float) Game.WIDTH / 2 - 32, (float) Game.WIDTH / 2 - 32, 64, 64));
 
+        this.backButtonImage = Game.TEXTRA_ALICE.getImageFrom(176, 16, 16, 16);
+        this.activeBackButtonImage = Game.TEXTRA_ALICE.getImageFrom(192, 16, 16, 16);
+
         this.skyImage = Game.TEXTRA_ALICE.getImageFrom(0, 0, 16, 16);
+
+        this.backButtonActive = false;
 
     }
 
@@ -88,11 +105,11 @@ public class GameStateClassicManager extends GameStateModeManager {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // ! TESTING CODE START
+        Rectangle backButtonBox = new Rectangle(16, 16, 48, 48);
 
-        Game.getState().switchMode(GameMode.HOME_SCREEN);
-
-        // ! TESTING CODE END
+        if (backButtonBox.contains(e.getX(), e.getY())) {
+            Game.getState().switchMode(GameMode.HOME_SCREEN);
+        }
     }
 
     @Override
@@ -112,6 +129,10 @@ public class GameStateClassicManager extends GameStateModeManager {
 
     @Override
     public void mouseMoved(MouseEvent e) {
+
+        Rectangle backButtonBox = new Rectangle(16, 16, 48, 48);
+
+        this.backButtonActive = backButtonBox.contains(e.getX(), e.getY());
 
     }
 
