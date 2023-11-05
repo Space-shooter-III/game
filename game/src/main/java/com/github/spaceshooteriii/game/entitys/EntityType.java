@@ -2,7 +2,8 @@ package com.github.spaceshooteriii.game.entitys;
 
 public enum EntityType {
 
-    PLAYER(false, true);
+    PLAYER(false, true),
+    BULLET(true, true);
 
     private final boolean CAN_DELETE;
     private final boolean CAN_MOVE;

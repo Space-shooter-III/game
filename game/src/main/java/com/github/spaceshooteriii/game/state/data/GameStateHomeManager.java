@@ -17,8 +17,11 @@ public class GameStateHomeManager extends GameStateModeManager {
     private BufferedImage titleImage;
     private BufferedImage playButtonImage;
     private BufferedImage activePlayButtonImage;
+    private BufferedImage quitButtonImage;
+    private BufferedImage activeQuitButtonImage;
 
     private boolean playButtonActive;
+    private boolean activeQuitButton;
 
     @Override
     public void draw(Graphics2D g2d) {
@@ -50,6 +53,12 @@ public class GameStateHomeManager extends GameStateModeManager {
             g2d.drawImage(this.playButtonImage, ((Game.WIDTH / 2) - (64 * 4) / 2), Game.HEIGHT / 3 * 2 - 16 * 4, 64 * 4, 16 * 4, null);
         }
 
+        if (this.activeQuitButton) {
+            g2d.drawImage(this.activeQuitButtonImage, 16, 16, 48, 48, null);
+        } else {
+            g2d.drawImage(this.quitButtonImage, 16, 16, 48, 48, null);
+        }
+
     }
 
     @Override
@@ -73,8 +82,11 @@ public class GameStateHomeManager extends GameStateModeManager {
         this.titleImage = Game.TEXTRA_ALICE.getImageFrom(16, 0, 96, 32);
         this.playButtonImage = Game.TEXTRA_ALICE.getImageFrom(112, 0, 64, 16);
         this.activePlayButtonImage = Game.TEXTRA_ALICE.getImageFrom(112, 16, 64, 16);
+        this.quitButtonImage = Game.TEXTRA_ALICE.getImageFrom(176, 0, 16, 16);
+        this.activeQuitButtonImage = Game.TEXTRA_ALICE.getImageFrom(192, 0, 16, 16);
 
         this.playButtonActive = false;
+        this.activeQuitButton = false;
 
     }
 
@@ -111,6 +123,12 @@ public class GameStateHomeManager extends GameStateModeManager {
             Game.getState().switchMode(GameMode.PLAYING_CLASSIC);
         }
 
+        Rectangle quitButtonBox = new Rectangle(16, 16, 48, 48);
+
+        if (quitButtonBox.contains(e.getX(), e.getY())) {
+            System.exit(0);
+        }
+
     }
 
     @Override
@@ -133,6 +151,10 @@ public class GameStateHomeManager extends GameStateModeManager {
         Rectangle playButtonBox = new Rectangle(((Game.WIDTH / 2) - (64 * 4) / 2), Game.HEIGHT / 3 * 2 - 16 * 4, 64 * 4, 16 * 4);
 
         this.playButtonActive = playButtonBox.contains(e.getX(), e.getY());
+
+        Rectangle quitButtonBox = new Rectangle(16, 16, 48, 48);
+
+        this.activeQuitButton = quitButtonBox.contains(e.getX(), e.getY());
 
     }
 
